@@ -2,6 +2,7 @@ package com.example.niedziala.ui.main
 
 import android.hardware.Sensor
 import android.hardware.SensorManager
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,15 +21,21 @@ class MainViewModel : ViewModel() {
     val resDistance: LiveData<String>
         get() = _resDistance
 
+    var _resAccelerometr: MutableLiveData<String> = MutableLiveData("Sensors not exist")
+    val resAccelerometr: LiveData<String>
+        get() = _resAccelerometr
+
     lateinit var mSensorManager: SensorManager
     lateinit var mLightSensor: Sensor
     lateinit var mProximitySensor: Sensor
+    lateinit var mAccelerometrSensor: Sensor
 
     var sensors = mutableListOf<Sensor>()
 
     fun isSensorManagerInitialized() = ::mSensorManager.isInitialized
     fun isLightSensorInitialized() = ::mLightSensor.isInitialized
     fun isProximitySensorInitialized() = ::mProximitySensor.isInitialized
+    fun isAccelerometrSensorInitialized() = ::mAccelerometrSensor.isInitialized
 
 
     fun getSensors(){
@@ -44,6 +51,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun setLight(s: Float){
+        Log.i("Light","im here")
         _resLight = MutableLiveData(s.toString())
     }
 
@@ -51,4 +59,7 @@ class MainViewModel : ViewModel() {
         _resDistance = MutableLiveData(s.toString())
     }
 
+    fun setAccelerometr(s1: Float, s2: Float, s3: Float){
+        _resAccelerometr = MutableLiveData(s1.toString() + " " + s2.toString() + " " + s3.toString())
+    }
 }

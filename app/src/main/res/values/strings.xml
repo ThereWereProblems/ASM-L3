@@ -2,4 +2,5 @@
     <string name="app_name">ASM_L3</string>
     <string name="czujnik_odleg">Czujnik odległości</string>
     <string name="czujnik_wiat">Czujnik światła</string>
+    <string name="accelerometr">Accelerometr</string>
 </resources>

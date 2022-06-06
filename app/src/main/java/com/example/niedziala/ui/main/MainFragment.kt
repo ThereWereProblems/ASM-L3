@@ -68,8 +68,17 @@ class MainFragment : Fragment(), SensorEventListener {
             viewModel.mSensorManager.registerListener(this,viewModel.mProximitySensor,SensorManager.SENSOR_DELAY_UI)
             Log.i("Proximity","init")
         }
-        else
-            Log.i("Proximity","not init")
+        else {
+            Log.i("Proximity", "not init")
+        }
+        if (viewModel.isAccelerometrSensorInitialized()){
+            viewModel.mSensorManager.registerListener(this,viewModel.mAccelerometrSensor,SensorManager.SENSOR_DELAY_UI)
+            Log.i("Accelerometr","init")
+        }
+        else{
+            Log.i("Accelerometr","not init")
+        }
+
     }
 
     override fun onStop() {
@@ -82,6 +91,7 @@ class MainFragment : Fragment(), SensorEventListener {
         viewModel.getSensors()
         viewModel.mLightSensor = viewModel.mSensorManager.getDefaultSensor(5)
         viewModel.mProximitySensor = viewModel.mSensorManager.getDefaultSensor(8)
+        viewModel.mAccelerometrSensor = viewModel.mSensorManager.getDefaultSensor(1)
     }
 
     override fun onSensorChanged(p0: SensorEvent?) {
@@ -95,6 +105,13 @@ class MainFragment : Fragment(), SensorEventListener {
             var currVal = p0.values[0]
             viewModel.setDistance(currVal)
             Log.i("Proximity",currVal.toString())
+        }
+        if(sensorType == Sensor.TYPE_ACCELEROMETER){
+            var currVal1 = p0.values[0]
+            var currVal2 = p0.values[1]
+            var currVal3 = p0.values[2]
+            viewModel.setAccelerometr(currVal1, currVal2, currVal3)
+            Log.i("Proximity",currVal1.toString() + " " + currVal2.toString() + " " + currVal3.toString())
         }
     }
 
