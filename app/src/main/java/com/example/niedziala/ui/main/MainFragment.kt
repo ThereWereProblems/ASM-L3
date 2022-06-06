@@ -1,5 +1,7 @@
 package com.example.niedziala.ui.main
 
+import android.content.Context
+import android.hardware.SensorManager
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,6 +22,8 @@ class MainFragment : Fragment() {
 
     private lateinit var viewModel: MainViewModel
 
+    private lateinit var thiscontext: Context
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +39,17 @@ class MainFragment : Fragment() {
         binding.dane = viewModel
         binding.lifecycleOwner = this
 
+        if (container != null) {
+            thiscontext = container.context
+        }
+        getManager()
+
         return binding.root
+    }
+
+    private fun getManager(){
+        viewModel.mSensorManager = getActivity()?.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        viewModel.getSensors()
     }
 
 }
