@@ -52,14 +52,14 @@ class MainViewModel : ViewModel() {
 
     fun setLight(s: Float){
         Log.i("Light","im here")
-        _resLight = MutableLiveData(s.toString())
+        _resLight.value = s.toString()
     }
 
     fun setDistance(s: Float){
-        _resDistance = MutableLiveData(s.toString())
+        _resDistance.value = s.toString()
     }
 
     fun setAccelerometr(s1: Float, s2: Float, s3: Float){
-        _resAccelerometr = MutableLiveData(s1.toString() + " " + s2.toString() + " " + s3.toString())
+        _resAccelerometr.value = s1.toString() + " " + s2.toString() + " " + s3.toString()
     }
 }
